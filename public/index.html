@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Garage Door Monitor</h1>
+<p><input type="button" id="open" value="Open"></p>
+<p><input type="button" id="close" value="Close"></p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
+<script>
+var socket = io(); //load socket.io-client and connect to the host that serves the page
+window.addEventListener("load", function(){ //when page loads
+  var gdState = document.getElementById("open");
+  gdState.addEventListener("click", function() { //add event listener for when checkbox changes
+    socket.emit("open", 0); //send button status to server (as 1 or 0)
+  });
+});
+window.addEventListener("load", function(){ //when page loads
+  var gdState = document.getElementById("close");
+  gdState.addEventListener("click", function() { //add event listener for when checkbox changes
+    socket.emit("close", 1); //send button status to server (as 1 or 0)
+  });
+});
+</script>
+
+</body>
+</html>
